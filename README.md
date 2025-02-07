@@ -1,0 +1,2 @@
+# GulistonAI
+guliston new version
