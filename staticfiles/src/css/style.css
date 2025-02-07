@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+    --primary: #ffcc00;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+body {
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+.editor-container aside {
+    width: 40%;
+    height: 600px;
+    overflow-y: scroll;
+    display: flex;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .1);
+    border: 1px solid #ebebeb;
+}
+
+.editor-container aside form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: auto 1;
+}
+
+/* form */
+
+form article {
+    border: 1px solid #ebebeb;
+    border-right: 4px solid #ffcc00;
+}
+
+form article .input-head {
+    background-color: #fbfbfb;
+    padding: 16px 16px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+form article .input-content {
+    padding: 16px 16px
+}
+
+
+/* document */
+
+.editor-container .document {
+    width: 100%;
+    /* height: 600px; */
+    height: 100%;
+    position: relative;
+    border: 1px solid #ebebeb;
+    /* box-shadow: 3px 3px 6px rgba(0, 0, 0, .1); */
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.editor-container textarea {
+    width: 100%;
+    resize: none !important;
+}
+
+.firstT-id,
+.secondT-id {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    gap: 20px;
+}
+
+.firstT-id button,
+.secondT-id button {
+    width: 30px;
+    height: 30px;
+    background-color: #f00;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+}
+
+.secondTable tr td span,
+.firstTable tr td span {
+    padding: 2px 4px;
+}
+
+.secondTable tr td span:hover,
+.firstTable tr td span:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.secondTable tr td,
+.firstTable tr td {
+    position: relative;
+}
+
+.secondTable tr td .select,
+.firstTable tr td .select {
+    background-color: #fff;
+    position: absolute;
+    list-style: none;
+    padding: 5px;
+    height: 200px;
+    overflow-y: scroll;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+    top: 60px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s;
+    z-index: 1;
+}
+
+.secondTable tr td .select input,
+.firstTable tr td .select input {
+    width: 100%;
+}
+
+.secondTable tr td .select li,
+.firstTable tr td .select li {
+    padding: 4px 8px;
+    border-radius: 4px;
+    user-select: none;
+}
+
+.secondTable tr td .select li:hover,
+.firstTable tr td .select li:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.secondTable tr td .select.active,
+.firstTable tr td .select.active {
+    opacity: 1;
+    visibility: visible;
+    top: 40px;
+}
+
+.secondTable tr td .select input,
+.firstTable tr td .select input {
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+}
+
+mark {
+    background-color: transparent !important;
+}

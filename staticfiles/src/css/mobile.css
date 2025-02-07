@@ -1,0 +1,10 @@
+@media screen and (max-width:767px) {
+    .editor-container {
+        flex-wrap: wrap;
+    }
+
+    .editor-container aside,
+    .editor-container .document {
+        width: 100%;
+    }
+}
