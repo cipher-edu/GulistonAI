@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.db.models import Q
 from django.contrib import messages
+from django.contrib.admin import DateFieldListFilter
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
@@ -202,7 +203,7 @@ class ShartnomaAdmin(admin.ModelAdmin):
     display_qr_code.short_description = 'QR Kode'
 
     def display_unique_id_link(self, obj):
-        url = f"https://guliston.cipher-edu.uz/shartnoma/{obj.unique_id}"
+        url = f"{settings.ALLOWED_HOSTS}/shartnoma/{obj.unique_id}"
         return format_html('<a href="{}" target="_blank">{}</a>', url, obj.unique_id)
 
     display_unique_id_link.short_description = 'Unique ID'

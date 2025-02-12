@@ -32,21 +32,32 @@ class Client(models.Model):
     client_stir = models.CharField(max_length=15, verbose_name='Stir kodi')
     mfo = models.CharField(max_length=10, verbose_name='MFO')
     schot_number = models.CharField(max_length=20, verbose_name='Hisob raqami')
-    certificate = models.FileField(upload_to='guvohnomalar/', verbose_name='Guvohnoma', validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg', 'png'])])
+    certificates = models.ManyToManyField('ClientCertificate', blank=True, null=True, verbose_name='Guvohnomalar', related_name='clients')
+    def __str__(self):
+        return self.client_name
+    class Meta:
+        verbose_name = "Mijoz qo'shish"
+        verbose_name_plural = "Mijozlarni qo'shish"
 
+  
     def clean(self):
         allowed_extensions = ['pdf', 'jpg', 'png']
-        if self.certificate and not self.certificate.name.split('.')[-1].lower() in allowed_extensions:
-            raise ValidationError({'certificate': 'Noto\'g\'ri fayl formati. Faqat pdf, jpg, png formatlar qabul qilinadi.'})
+        for certificate in self.certificates.all():
+            if not certificate.file.name.split('.')[-1].lower() in allowed_extensions:
+                raise ValidationError({'certificates': 'Noto\'g\'ri fayl formati. Faqat pdf, jpg, png formatlar qabul qilinadi.'})
         if self.passport_file and not self.passport_file.name.split('.')[-1].lower() in allowed_extensions:
             raise ValidationError({'passport_file': 'Noto\'g\'ri fayl formati. Faqat pdf, jpg, png formatlar qabul qilinadi.'})
 
+class ClientCertificate(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='certificates_list')
+    file = models.FileField(upload_to='guvohnomalar/', verbose_name='Guvohnoma', validators=[FileExtensionValidator(allowed_extensions=['pdf', 'jpg', 'png'])])
+
     def __str__(self):
-        return self.client_name
+        return self.client.client_name
 
     class Meta:
-        verbose_name = 'Mijoz qo\'shish'
-        verbose_name_plural = 'Mijozlarni qo\'shish'
+        verbose_name = 'Mijoz guvohnomalari'
+        verbose_name_plural = 'Mijozlarning guvohnomalari'
 
 class Sklad(models.Model):
     item_name = models.CharField(max_length=255, verbose_name='Tovar nomi')
